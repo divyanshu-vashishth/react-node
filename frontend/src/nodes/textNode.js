@@ -31,7 +31,7 @@ export const TextNode = ({ id, data }) => {
 
   const handleTextChange = (e) => {
     setText(e.target.value);
-    // Adjust textarea height immediately on input
+    // textarea height update on input change
     e.target.style.height = 'auto';
     e.target.style.height = `${e.target.scrollHeight}px`;
   };

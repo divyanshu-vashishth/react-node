@@ -13,7 +13,7 @@ export const OutputNode = ({ id, data }) => {
   }, [currName, outputType, data]);
 
   const content = () => (
-    <div className="p-4 space-y-4">
+    <div className=" space-y-4">
       <Input
         size="md"
         label="Name"
