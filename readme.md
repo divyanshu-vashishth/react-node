@@ -1,12 +1,4 @@
-
-### I have used virtual environment in fastapi backend
-
-
-### In chromium based browser when I am using number node and increasing, decreasing through symbol (^) It is not increasing and decreasing automaticaly.When I am using mozilla based browser it is working fine. 
-
-### After creating one edge between any two nodes in chrome visibility of cursor is getting worse. I have tried same on mozilla browser it is working fine. I have tried some methods like giving cursor styles to different components but it is not working. So I change the background color grayis of pipeline ui. 
-
-#### We can also use this python code to parse that pipeline it uses networkx library to create a directed graph and then checks if the graph is a DAG or not. 
+Simple Pipe line Editor
 
 ### In backend
 ```python
