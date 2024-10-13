@@ -8,9 +8,7 @@ from numpy import numpy as np
 
 
 
-# Load the model
-with open('churn_model.pkl', 'rb') as f:
-    model = pickle.load(f)
+
 
 
 app = FastAPI()
@@ -109,27 +107,19 @@ async def parse_pipeline(pipeline: Pipeline):
 @app.post('/predict')
 async def predict(input_data: PredictionInput):
     try:
+        # Load the model lazily
+        with open('data/churn_model.pkl', 'rb') as f:
+            model = pickle.load(f)
+        
         # Convert input features into a numpy array
         input_array = np.array(input_data.features).reshape(1, -1)
         
-        # Convert to torch tensor
-        input_tensor = torch.FloatTensor(input_array)
-        
-        # Split into categorical and continuous features
-        cat_features = input_tensor[:, :5]  # Adjust this based on your actual feature split
-        cont_features = input_tensor[:, 5:]
-        
         # Make a prediction
-        with torch.no_grad():
-            prediction = model(cat_features, cont_features)
-        
-        # Get the predicted class (0 or 1)
-        predicted_class = prediction.argmax(dim=1).item()
+        prediction = model.predict(input_array)
         
         # Return the prediction result
         return {
-            "predicted_class": predicted_class,
-            "probability": prediction[0][predicted_class].item()
+            "prediction": prediction.tolist()  # Convert prediction to list to make it JSON serializable
         }
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
