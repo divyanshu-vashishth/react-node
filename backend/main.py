@@ -2,9 +2,9 @@ from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from typing import List, Dict, Set
 from fastapi.middleware.cors import CORSMiddleware
-from pickle import pickle
-from torch import torch
-from numpy import numpy as np
+# from pickle import pickle
+# from torch import torch
+# from numpy import numpy as np
 
 
 
@@ -104,22 +104,22 @@ async def parse_pipeline(pipeline: Pipeline):
         raise HTTPException(status_code=400, detail=str(e))
 
 
-@app.post('/predict')
-async def predict(input_data: PredictionInput):
-    try:
-        # Load the model lazily
-        with open('data/churn_model.pkl', 'rb') as f:
-            model = pickle.load(f)
+# @app.post('/predict')
+# async def predict(input_data: PredictionInput):
+#     try:
+#         # Load the model lazily
+#         with open('data/churn_model.pkl', 'rb') as f:
+#             model = pickle.load(f)
         
-        # Convert input features into a numpy array
-        input_array = np.array(input_data.features).reshape(1, -1)
+#         # Convert input features into a numpy array
+#         input_array = np.array(input_data.features).reshape(1, -1)
         
-        # Make a prediction
-        prediction = model.predict(input_array)
+#         # Make a prediction
+#         prediction = model.predict(input_array)
         
-        # Return the prediction result
-        return {
-            "prediction": prediction.tolist()  # Convert prediction to list to make it JSON serializable
-        }
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+#         # Return the prediction result
+#         return {
+#             "prediction": prediction.tolist()  # Convert prediction to list to make it JSON serializable
+#         }
+#     except Exception as e:
+#         raise HTTPException(status_code=500, detail=str(e))
