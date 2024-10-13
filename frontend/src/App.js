@@ -9,9 +9,9 @@ function App() {
   return (
     <>
       <Navbar className="sticky flex cursor-default top-2 mx-auto w-full max-w-screen-xl">
-        <div className="flex  items-center justify-between text-black font-serif mx-auto">
+        <div className="flex  items-center text-black justify-between flex-1">
         <Typography
-          className="text-2xl"
+          className="text-2xl font-serif "
         >
           <a  
           href="#"
