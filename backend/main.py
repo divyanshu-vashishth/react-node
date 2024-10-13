@@ -2,9 +2,9 @@ from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from typing import List, Dict, Set
 from fastapi.middleware.cors import CORSMiddleware
-import pickle
-import torch
-import numpy as np
+from pickle import pickle
+from torch import torch
+from numpy import numpy as np
 
 
 
