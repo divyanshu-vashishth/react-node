@@ -1,6 +1,6 @@
 ## Simple Pipe line Editor
 
-In backend
+In backend we can also use networkx for edge, node detection of graphs in backend
 
 ```python
 from fastapi import FastAPI, HTTPException
