@@ -2,19 +2,30 @@ from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from typing import List, Dict, Set
 from fastapi.middleware.cors import CORSMiddleware
+import pickle
+import torch
+import numpy as np
 
+
+
+# Load the model
+with open('churn_model.pkl', 'rb') as f:
+    model = pickle.load(f)
 
 
 app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"], # not for productions
+    allow_origins=["https://react-node-beryl.vercel.app/"], # not for productions
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
+
+class PredictionInput(BaseModel):
+    features: List[float]
 
 class Node(BaseModel):
     id: str
@@ -95,4 +106,30 @@ async def parse_pipeline(pipeline: Pipeline):
         raise HTTPException(status_code=400, detail=str(e))
 
 
-
+@app.post('/predict')
+async def predict(input_data: PredictionInput):
+    try:
+        # Convert input features into a numpy array
+        input_array = np.array(input_data.features).reshape(1, -1)
+        
+        # Convert to torch tensor
+        input_tensor = torch.FloatTensor(input_array)
+        
+        # Split into categorical and continuous features
+        cat_features = input_tensor[:, :5]  # Adjust this based on your actual feature split
+        cont_features = input_tensor[:, 5:]
+        
+        # Make a prediction
+        with torch.no_grad():
+            prediction = model(cat_features, cont_features)
+        
+        # Get the predicted class (0 or 1)
+        predicted_class = prediction.argmax(dim=1).item()
+        
+        # Return the prediction result
+        return {
+            "predicted_class": predicted_class,
+            "probability": prediction[0][predicted_class].item()
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))

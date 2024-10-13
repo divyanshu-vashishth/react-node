@@ -12,7 +12,7 @@ export const SubmitButton = () => {
         const nodes = getNodes();
         const edges = getEdges();
         try {
-            const response = await fetch('http://localhost:8000/pipelines/parse', {
+            const response = await fetch('https://react-node-backend-ashy.vercel.app/pipelines/parse', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

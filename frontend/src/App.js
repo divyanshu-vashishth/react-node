@@ -9,8 +9,9 @@ function App() {
   return (
     <>
       <Navbar className="sticky flex cursor-default top-2 mx-auto w-full max-w-screen-xl">
+        <div className="flex  items-center justify-between text-black font-serif mx-auto">
         <Typography
-          className="flex  items-center justify-between text-black text-2xl font-serif"
+          className="text-2xl"
         >
           <a  
           href="#"
@@ -18,6 +19,16 @@ function App() {
           Pipeline Editor
           </a>
         </Typography>
+        <Typography
+          className="text-xl "
+        >
+          <a  
+          href="https://react-node-backend-ashy.vercel.app/docs"
+          type="lead">
+          Documentation
+          </a>
+        </Typography>
+        </div>
       </Navbar>
       <div className="w-screen ">
         <ReactFlowProvider>
