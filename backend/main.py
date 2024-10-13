@@ -22,8 +22,8 @@ app.add_middleware(
 )
 
 
-class PredictionInput(BaseModel):
-    features: List[float]
+# class PredictionInput(BaseModel):
+#     features: List[float]
 
 class Node(BaseModel):
     id: str
