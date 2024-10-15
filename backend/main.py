@@ -15,7 +15,7 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://react-node-beryl.vercel.app/"], # not for productions
+    allow_origins=["*"], # not for productions
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
